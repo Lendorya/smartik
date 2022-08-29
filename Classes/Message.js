@@ -3,15 +3,31 @@
 const { Message, EmbedBuilder, MessagePayload, TextChannel } = require("discord.js");
 const consola = require("consola")
 
-  Message.prototype.fail = function(args) {
-      let embed = {
-        author: {
-          name: this.author.tag,
-          icon_url: this.author.avatarURL({dynamic: true, size: 2048, type: "png"})
-        },
-        description: args,
-        color: cfg.color
-      }
+  Message.prototype.fail = function(args, image = "none") {
+    let embed;
+    // https://cdn.discordapp.com/attachments/1010986998183510087/1013730597690167376/unknown.png
+    if (image == "none") {
+        embed = {
+          author: {
+            name: this.author.tag,
+            icon_url: this.author.avatarURL({dynamic: true, size: 2048, type: "png"})
+          },
+          description: args,
+          color: cfg.color
+        }
+    } else {
+      embed = {
+          author: {
+            name: this.author.tag,
+            icon_url: this.author.avatarURL({dynamic: true, size: 2048, type: "png"})
+          },
+          description: args,
+          color: cfg.color,
+          image: {
+            url: image
+          }
+        }
+    }
       this.reply({embeds:[embed]});
   }
 
@@ -43,6 +59,6 @@ const consola = require("consola")
     try {
         return await this.channel.send(data);
     } catch(e) {
-        return consola.error(`Ошибка на сервере ${this.guild.name} по причине ${e}`)
+        return consola.warn(`Ошибка на сервере ${this.guild.name} по причине ${e}`)
     }
   }

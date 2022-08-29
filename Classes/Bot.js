@@ -57,4 +57,20 @@ module.exports = class Bot extends Client {
     })
     this.logger.info(`Было получено [${this.a+this.d}] команд, из них было загружено [${this.a}] команд`)
   }
+
+  fatal(args) {
+    this.logger.fatal(args)
+  }
+  error(args) {
+    this.logger.error(args)
+  }
+  success(args) {
+    this.logger.success(args)
+  }
+  warn(args) {
+    this.logger.warn(args)
+  }
+  info(args) {
+    this.logger.info(args)
+  }
 }

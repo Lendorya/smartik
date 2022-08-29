@@ -44,7 +44,7 @@ if (valuee.cat == "Разработчик") return;
       if (valuee.cat == "NSFW" && message.channel.nsfw == false) return ;
         await findCmds(valuee.cat)
 })
-message.channel.send({embeds:[embed]})
+message.reply({embeds:[embed]})
 
     } else {
       let al;

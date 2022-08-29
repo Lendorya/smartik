@@ -1,5 +1,4 @@
 const Bot = require('./Classes/Bot.js');
-// const canvas = require("canvas")
 const canvacord = require("canvacord")
 global.cfg = require("./cfg.js")
 global.tr = require("./translates.js")
@@ -17,4 +16,4 @@ server.all('/', (req, res) => {res.send(`ок`)})
 function keepAlive() {server.listen(3000, () => { consola.success("Подключено!") });}
 module.exports = keepAlive;
 bot.starter()
-try{} catch(e) {consola.error(e)}
+try{} catch(e) {consola.fatal(e)}

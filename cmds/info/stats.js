@@ -40,13 +40,6 @@ module.exports = {
     else if (weeks == 0 && days == 0) up = `${hours}ч ${minutes}м ${seconds}с`
     else if (weeks == 0) up = `${days}д ${hours}ч ${minutes}м ${seconds}с`
     else up = `${weeks} ${days}д ${hours}ч ${minutes}м ${seconds}с`
-
-    let ping;
-    if (client.ws.ping<300) ping = `:green_circle:`
-    else if (client.ws.ping<600) ping = `:yellow_circle:`
-    else if (client.ws.ping<1400) ping = `:orange_circle:`
-    else if (client.ws.ping<1700) ping = `:red_circle:`
-    else if (client.ws.ping>1700) ping = `:black_circle:`
     let c = await cpu.free()
     let embed = {
       title: "Статистика бота",

@@ -5,7 +5,7 @@ module.exports = {
   event: "messageCreate",
   run: async(client,message) => {
     // SendMessages
-          if(!message.guild.members.me.permissions.has(PermissionsBitField.Flags["SendMessages"])) return;
+          
     try {
       let prefix = "s."
       if (message.author.bot) return;
