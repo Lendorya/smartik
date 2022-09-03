@@ -16,4 +16,3 @@ server.all('/', (req, res) => {res.send(`ок`)})
 function keepAlive() {server.listen(3000, () => { consola.success("Подключено!") });}
 module.exports = keepAlive;
 bot.starter()
-try{} catch(e) {consola.fatal(e)}

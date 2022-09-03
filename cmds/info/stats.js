@@ -1,5 +1,5 @@
 const { get } = require("systeminformation");
-const {cpu} = require('node-os-utils');
+const { cpu } = require('node-os-utils');
 module.exports = {
   name: "stats",
   aliases: ["bot", "bs"],
@@ -11,15 +11,15 @@ module.exports = {
     user: []
   },
   run: async(client,message,args) => {
+    let a = await db.all()
+    let msg = await message.reply("Получаю информацию..") 
     get({
             "cpu": "manufacturer, brand, speed, cores, physicalCores",
             "mem": "total, used",
         }).then(async(data) => {
             const cpuManufacturer = data.cpu.manufacturer;
             const cpuBrand = data.cpu.brand;
-            const cpuSpeed = data.cpu.speed;
             const cpuCores = data.cpu.cores;
-            const cpuPhysicalCores = data.cpu.physicalCores;
     
             const memUsed = (data.mem.used / 1024 / 1024).toFixed(2);
             const memTotal = (data.mem.total / 1024 / 1024).toFixed(2);
@@ -44,13 +44,43 @@ module.exports = {
     let embed = {
       title: "Статистика бота",
       fields: [
-      {name: "Основное", value: `\`\`\`asciidoc\nПинг API :: ${client.ws.ping}ms\nПинг бота :: ${Date.now() - message.createdTimestamp}ms\nАптайм :: ${up}\nСерверов :: ${client.guilds.cache.size}\nПользователи :: ${client.users.cache.size}\nРазработчик :: ${de.join(", ")}\`\`\``,inline: true},
+      {
+       name: "Основное", 
+       value: `\`\`\`asciidoc
+Пинг API     :: ${client.ws.ping}ms
+Пинг бота    :: ${Date.now() - message.createdTimestamp}ms
+Аптайм       :: ${up}
+Серверов     :: ${client.guilds.cache.size}
+Пользователи :: ${client.users.cache.size}
+Разработчик  :: ${de.join(", ")}
+\`\`\``,inline: true},
       
-      {name: "Сервера", value: `\`\`\`asciidoc\nПлатформа :: ${require('os').platform} ${require('os').arch}\nПроцессор :: ${cpuManufacturer} ${cpuBrand}\nЯдер :: ${cpuCores}\nПотоков :: ${cpuPhysicalCores}\nДоступно :: ${c.toFixed(2)}% \nОЗУ :: ${memUsed && memTotal ? (memUsed + "MB / " + memTotal + "MB") : "b"}\`\`\``,inline: true}
+      {
+        name: "Сервера", 
+        value: `\`\`\`asciidoc
+Платформа    :: ${require('os').platform} ${require('os').arch}
+Процессор    :: ${cpuManufacturer} ${cpuBrand}
+Ядер         :: ${cpuCores}
+Доступно     :: ${c.toFixed(2)}%
+ОЗУ (занято) :: ${memUsed}MB
+ОЗУ (всего)  :: ${memTotal}MB
+\`\`\``,inline: true},
+
+        {
+          name: "База данных",
+          value: `\`\`\`asciidoc
+База Данных  :: quick.db
+Версия       :: ^9.0.6
+Ключей в БД  :: ${a.length}\`\`\``,
+          inline: false
+        }
       ],
       color: cfg.color
     }
-    message.reply({embeds:[embed]})
+      setTimeout(async() => {
+        await msg.edit({content: "", embeds: [embed]})
+      }, 1500)
+      
     })
   }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  name: "set-lvlMessage-channel",
+  name: "channel",
   aliases: ["slmc"],
   category: "Настройки",
   description: "Настройка канала для отравки поздравления о новом уровне",

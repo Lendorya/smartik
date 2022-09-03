@@ -41,7 +41,8 @@ module.exports = {
     if(!need) await db.set(`need_${server}_${user}`, 300)
     if(!lvlSystem) await db.set(`lvlSystem_${server}`, true)
     if(!channelLvl) await db.set(`channelLvl_${server}`, "message")
-
+    let date = await db.has(`date_${server}_${user}`)
+    if(!date) await db.set(`date_${server}_${user}`, `<t:${Math.floor(Date.now()/1000)}>`)
     // Сезоны
 
     let sweets = await db.has(`sweets_${user}`)
@@ -67,6 +68,7 @@ module.exports = {
     let all = await db.has(`all_${server}_${user}`)
     let xp = await db.has(`xp_${server}_${user}`)
     let need = await db.has(`need_${server}_${user}`)
+    let date = await db.has(`date_${server}_${user}`)
     let lvlSystem = await db.has(`lvlSystem_${server}`)
     let channelLvl = await db.has(`channelLvl_${server}`)
     has.push(!money)
@@ -81,6 +83,7 @@ module.exports = {
     has.push(!need)
     has.push(!lvlSystem)
     has.push(!channelLvl)
+    has.push(!date)
     if (has.includes(true)) hasProfl = false
     else hasProfl = true
     return hasProfl

@@ -1,5 +1,5 @@
 module.exports = {
-  featuresTranslate : {
+  featuresTranslate: {
     "ANIMATED_ICON": "Анимированная Иконка",
     "BANNER": "Баннер",
     "COMMUNITY": "Коммьюнити",
@@ -28,7 +28,7 @@ module.exports = {
   channelsTranslate: {
     0: "Текстовый",
     1: "Лс",
-    2: "Голосовой", 
+    2: "Голосовой",
     3: "Группа",
     4: "Категория",
     5: "Новости",
